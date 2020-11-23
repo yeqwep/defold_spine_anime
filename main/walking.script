@@ -1,0 +1,47 @@
+local man1 = nil
+local man1_pos = nil
+local man2 = nil
+local man2_pos = nil
+
+function init(self)
+	msg.post("/camera#camera", "acquire_camera_focus")
+	-- skin変更
+	spine.set_skin("/man1/go#spinemodel", "b")
+	spine.set_skin("/man2/go#spinemodel", "p")
+end
+
+function update(self, dt)
+	-- man1の位置更新
+	man1 = spine.get_go("spine_script#stage", "man1")
+	man1_pos = go.get_position(man1)
+	go.set_position(man1_pos, "/man1/go")
+	-- man2の位置更新
+	man2 = spine.get_go("spine_script#stage", "man2")
+	man2_pos = go.get_position(man2)
+	go.set_position(man2_pos, "/man2/go")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("spine_event") then
+		-- man1のアニメ変更
+		if message.event_id == hash("man1_idle") then
+			spine.play_anim("/man1/go#spinemodel", "idle", go.PLAYBACK_LOOP_FORWARD)
+		elseif message.event_id == hash("man1_walk") then
+			spine.play_anim("/man1/go#spinemodel", "walk", go.PLAYBACK_LOOP_FORWARD)
+		elseif message.event_id == hash("man1_L") then
+			go.set_rotation(vmath.quat_rotation_y(math.pi), "/man1/go")
+		elseif message.event_id == hash("man1_R") then
+			go.set_rotation(vmath.quat_rotation_y(0), "/man1/go")
+		end
+		-- man2のアニメ変更
+		if message.event_id == hash("man2_idle") then
+			spine.play_anim("/man2/go#spinemodel", "idle", go.PLAYBACK_LOOP_FORWARD)
+		elseif message.event_id == hash("man2_walk") then
+			spine.play_anim("/man2/go#spinemodel", "walk", go.PLAYBACK_LOOP_FORWARD)
+		elseif message.event_id == hash("man2_L") then
+			go.set_rotation(vmath.quat_rotation_y(math.pi), "/man2/go")
+		elseif message.event_id == hash("man2_R") then
+			go.set_rotation(vmath.quat_rotation_y(0), "/man2/go")
+		end
+	end
+end
