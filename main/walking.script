@@ -41,7 +41,7 @@ function on_message(self, message_id, message, sender)
 		end
 		if message.event_id == hash("man2_idle") then	-- man2のアニメをidleに切り替えます
 			spine.play_anim("/man2/go#spinemodel", "idle", go.PLAYBACK_LOOP_FORWARD)
-		elseif message.event_id == hash("man2_walk") then	-- man2のアニメをidleに切り替えます
+		elseif message.event_id == hash("man2_walk") then	-- man2のアニメをwalkに切り替えます
 			spine.play_anim("/man2/go#spinemodel", "walk", go.PLAYBACK_LOOP_FORWARD)
 		elseif message.event_id == hash("man2_L") then	-- man2の向きを左に切り替えます
 			go.set_rotation(vmath.quat_rotation_y(math.pi), "/man2/go")
