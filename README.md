@@ -18,5 +18,6 @@ Spine screen
 ![p_4](https://user-images.githubusercontent.com/38267288/121199849-3987d500-c8ae-11eb-9c18-47d3b956256d.jpg)
 
 # How to use
--You can edit the movement of the actor and the whole movement using Spine.
--Add the events and actors you need to "walking.scrpt".
+1.You can edit the movement of the actor and the whole movement using Spine.
+
+2.Add the events and actors you need to "walking.script".
